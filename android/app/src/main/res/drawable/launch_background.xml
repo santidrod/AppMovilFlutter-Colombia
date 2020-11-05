@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?><!-- Modify this file to customize your launch splash screen -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <item android:drawable="@android:color/white" />
+
+    <item>
+        <bitmap
+            android:layout_width="match_parent"
+            android:width="150dp"
+            android:height="150dp"
+            android:gravity="center"
+            android:src="@drawable/logo_ciudadania2"
+            tools:ignore="ResourceCycle" />
+    </item>
+</layer-list>

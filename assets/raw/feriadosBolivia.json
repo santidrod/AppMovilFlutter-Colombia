@@ -1,0 +1,98 @@
+[
+    {
+        "year": 2020,
+        "holidays": [
+            "01/Enero/2020",
+            "22/Enero/2020",
+            "24/Febrero/2020",
+            "25/Febrero/2020",
+            "10/Abril/2020",
+            "01/Mayo/2020",
+            "11/Junio/2020",
+            "21/Junio/2020",
+            "06/Agosto/2020",
+            "02/Noviembre/2020",
+            "25/Diciembre/2020"
+        ]
+    },
+    {
+        "year": 2021,
+        "holidays": [
+            "01/Enero/2021",
+            "22/Enero/2021",
+            "15/Febrero/2021",
+            "16/Febrero/2021",
+            "02/Abril/2021",
+            "01/Mayo/2021",
+            "03/Junio/2021",
+            "21/Junio/2021",
+            "06/Agosto/2021",
+            "02/Noviembre/2021",
+            "25/Diciembre/2021"
+        ]
+    },
+    {
+        "year": 2022,
+        "holidays": [
+            "01/Enero/2022",
+            "22/Enero/2022",
+            "28/Febrero/2022",
+            "01/Marzo/2022",
+            "15/Abril/2022",
+            "01/Mayo/2022",
+            "16/Junio/2022",
+            "21/Junio/2022",
+            "06/Agosto/2022",
+            "02/Noviembre/2022",
+            "25/Diciembre/2022"
+        ]
+    },
+    {
+        "year": 2023,
+        "holidays": [
+            "01/Enero/2023",
+            "22/Enero/2023",
+            "20/Febrero/2023",
+            "21/Febrero/2023",
+            "07/Abril/2023",
+            "01/Mayo/2023",
+            "08/Junio/2023",
+            "21/Junio/2023",
+            "06/Agosto/2023",
+            "02/Noviembre/2023",
+            "25/Diciembre/2023"
+        ]
+    },
+    {
+        "year": 2024,
+        "holidays": [
+            "01/Enero/2024",
+            "22/Enero/2024",
+            "12/Febrero/2024",
+            "13/Febrero/2024",
+            "29/Marzo/2024",
+            "01/Mayo/2024",
+            "30/Mayo/2024",
+            "21/Junio/2024",
+            "06/Agosto/2024",
+            "02/Noviembre/2024",
+            "25/Diciembre/2024"
+        ]
+    },
+    {
+        "year": 2025,
+        "holidays": [
+            "01/Enero/2025",
+            "22/Enero/2025",
+            "03/Marzo/2025",
+            "04/Marzo/2025",
+            "18/Abril/2025",
+            "01/Mayo/2025",
+            "19/Junio/2025",
+            "21/Junio/2025",
+            "06/Agosto/2025",
+            "02/Noviembre/2025",
+            "25/Diciembre/2025"
+        ]
+    }
+]

@@ -1,0 +1,1470 @@
+@startuml
+set namespaceSeparator ::
+
+class "ciudadaniadigital::models::NotificacionModel.dart::NotificacionModel" {
+  -String _id
+  -String _titulo
+  -String _institucion
+  -String _updateAt
+  -bool _finalizado
+  -String _nombreFlujo
+  -bool _destacado
+  +String getNombreFlujo
+  +String setNombreFlujo
+  +bool getFinalizado
+  +String getUpdateAt
+  +String getInstitucion
+  +String getTitulo
+  +String getId
+  +bool getDestacado
+  +Map toJson()
+  +void setDestacado()
+}
+
+class "ciudadaniadigital::models::EntidadTramiteModel.dart::EntidadTramiteModel" {
+  -int _idEntidad
+  -String _nombreEntidad
+  -String _descripcion
+  -String _sigla
+  -String _direccion
+  -String _estado
+  -int _codigoPortal
+  -List<TramiteModel> _tramites
+  -bool _autorizado
+  +bool getAutorizado
+  +bool autorizado
+  +List<TramiteModel> getTramites
+  +int codigoPortal
+  +String getEstado
+  +String direccion
+  +String getSigla
+  +String descripcion
+  +String nombreEntidad
+  +int idEntidad
+  +List<TramiteModel> tramites
+  +String estado
+  +String sigla
+  +Map toJson()
+}
+
+class "ciudadaniadigital::models::TramiteModel.dart::TramiteModel" {
+  -int _idTramite
+  -int _codigoTramite
+  -String _descripcionTramite
+  -bool _obligatorio
+  -bool _validado
+  -bool _autorizado
+  +bool getAutorizado
+  +bool validado
+  +bool obligatorio
+  +String descripcionTramite
+  +int codigoTramite
+  +int idTramite
+  +bool autorizado
+  +Map toJson()
+}
+
+class "ciudadaniadigital::models::MarcadorModelAccess.dart::MarcadorModelAccess" {
+  -String _key
+  -List<MarcadorModel> _listMarcadores
+  +Future save()
+  +Future getAll()
+  +void add()
+  +Future clean()
+  +List toArrayJson()
+  +int length()
+  +MarcadorModel getByPosition()
+  +MarcadorModel getById()
+  +int getIndex()
+  +void deleteById()
+}
+
+"flutter_secure_storage::flutter_secure_storage.dart::FlutterSecureStorage" <|-- "ciudadaniadigital::models::MarcadorModelAccess.dart::MarcadorModelAccess"
+
+class "ciudadaniadigital::models::MarcadorModel.dart::MarcadorModel" {
+  -String _idTramite
+  -String _titulo
+  -String _sigla
+  +String sigla
+  +String titulo
+  +String idTramite
+  +Map toJson()
+}
+
+class "ciudadaniadigital::utilidades::Services.dart::TipoPeticion" {
+  +int index
+  {static} +List<TipoPeticion> values
+  {static} +TipoPeticion GET
+  {static} +TipoPeticion POST
+  {static} +TipoPeticion DELETE
+  {static} +TipoPeticion PUT
+  {static} +TipoPeticion PATCH
+}
+
+"ciudadaniadigital::utilidades::Services.dart::TipoPeticion" o-- "ciudadaniadigital::utilidades::Services.dart::TipoPeticion"
+
+class "ciudadaniadigital::utilidades::Services.dart::Services" {
+  {static} +List<int> statusSuccefull
+  {static} +Future conexionInternet()
+  {static} +Future peticion()
+}
+
+class "ciudadaniadigital::utilidades::Constantes.dart::Ambiente" {
+  +int index
+  {static} +List<Ambiente> values
+  {static} +Ambiente PROD
+  {static} +Ambiente PREPROD
+  {static} +Ambiente TEST
+}
+
+"ciudadaniadigital::utilidades::Constantes.dart::Ambiente" o-- "ciudadaniadigital::utilidades::Constantes.dart::Ambiente"
+
+class "ciudadaniadigital::utilidades::Constantes.dart::Constantes" {
+  {static} +Ambiente ambiente
+  {static} +String urlGobBoTramites
+  {static} +String urlCiudadania
+  {static} +String urlCiudadaniaServiciosDigitales
+  {static} +String urlNotificacionesConfiguracion
+  {static} +String urlNotificacionesBandeja
+  {static} +String urlBasePreRegistroForm
+  {static} +String urlBasePreRegistroEntidadesSucursales
+  {static} +String urlBasePreRegistroEntidades
+  {static} +String urlSocket
+  {static} +String urlPathSocket
+  {static} +String socketCertURi
+  {static} +String urlBasePreBuzonLogin
+  {static} +String urlBasePreBuzon
+  {static} +String urlBasePortalNotPreBuzon
+  {static} +String urlVerificarVersion
+  {static} +String urlMQTT
+  {static} +String usuarioMQTT
+  {static} +String passwordUsuarioMQTT
+  {static} +String urlBasePreTerminosCondiciones
+  {static} +String urlIsuer
+  {static} +String discoveryURL
+  {static} +List<String> scopes
+  {static} +String clientID
+  {static} +String redirectURL
+  {static} +String urlStore
+}
+
+"ciudadaniadigital::utilidades::Constantes.dart::Constantes" o-- "ciudadaniadigital::utilidades::Constantes.dart::Ambiente"
+
+class "ciudadaniadigital::utilidades::validaciones.dart::Validar" {
+  {static} +Pattern emailPattern
+  {static} +RegExp emailRegEx
+  {static} +Pattern datePattern
+  {static} +RegExp dateRegEx
+  {static} +bool isEmail()
+  {static} +bool fecha()
+  {static} +bool contrasenia()
+  {static} +String requiredField()
+}
+
+class "ciudadaniadigital::utilidades::dispositivo.dart::Dispositivo" {
+  {static} +DeviceInfoPlugin deviceInfo
+  {static} +Future getId()
+  {static} +Future getCountryCode()
+  {static} +Future getCarrierName()
+  {static} +Future esEmulador()
+  {static} +bool esTablet()
+  {static} +Future esRooteado()
+  {static} +Future esRooteado2()
+  {static} +Future almacenamientoExterno()
+  {static} +Future ejecucionInsegura()
+  {static} +Future getModel()
+}
+
+"ciudadaniadigital::utilidades::dispositivo.dart::Dispositivo" o-- "device_info::device_info.dart::DeviceInfoPlugin"
+
+class "ciudadaniadigital::utilidades::otp.dart::OTP" {
+  {static} +int generateTOTPCode()
+  {static} +int generateHOTPCode()
+  {static} -int _generateCode()
+  {static} +String randomSecret()
+  {static} +String dec2hex()
+  {static} +String leftpad()
+  {static} +List hex2bytes()
+  {static} -List _int2bytes()
+  {static} +int bytes2int()
+}
+
+class "ciudadaniadigital::utilidades::sesion.dart::Sesion" {
+  {static} -FlutterAppAuth _appAuth
+  {static} +Future cerrarSesion()
+  {static} +dynamic revocarTokens()
+  {static} +dynamic revokeToken()
+  {static} +dynamic logout()
+  {static} +Future actualizarOAUTH()
+}
+
+"ciudadaniadigital::utilidades::sesion.dart::Sesion" o-- "flutter_appauth::src::flutter_appauth.dart::FlutterAppAuth"
+
+class "ciudadaniadigital::utilidades::animaciones.dart::SlideBottomRoute" {
+  +Widget page
+}
+
+"ciudadaniadigital::utilidades::animaciones.dart::SlideBottomRoute" o-- "flutter::src::widgets::framework.dart::Widget"
+"flutter::src::widgets::pages.dart::PageRouteBuilder<T>" <|-- "ciudadaniadigital::utilidades::animaciones.dart::SlideBottomRoute"
+
+class "ciudadaniadigital::utilidades::animaciones.dart::FadeRoute" {
+  +Widget page
+}
+
+"ciudadaniadigital::utilidades::animaciones.dart::FadeRoute" o-- "flutter::src::widgets::framework.dart::Widget"
+"flutter::src::widgets::pages.dart::PageRouteBuilder<T>" <|-- "ciudadaniadigital::utilidades::animaciones.dart::FadeRoute"
+
+class "ciudadaniadigital::utilidades::alertas.dart::Alertas" {
+  {static} +void showToast()
+}
+
+class "ciudadaniadigital::utilidades::colores.dart::ColorApp" {
+  {static} +Color primary
+  {static} +Color primaryHover
+  {static} +Color success
+  {static} +Color info
+  {static} +Color warning
+  {static} +Color error
+  {static} +Color bg
+  {static} +Color title
+  {static} +Color secondary
+  {static} +Color facebook
+  {static} +Color whatsapp
+  {static} +Color btnBackground
+  {static} +Color btnBackgroundLight
+  {static} +Color btnBackgroundLightBorder
+  {static} +Color greyBackground
+  {static} +Color greyText
+  {static} +Color greyLightText
+  {static} +Color greyDarkText
+  {static} +Color blackText
+  {static} +Color buttons
+  {static} +Color buttonsBackGround
+  {static} +Color buttonsborder
+  {static} +Color listFillCell
+  {static} +Color errorRequest
+  {static} +Color alert
+  {static} +Color budget
+  {static} +Color colorPass1
+  {static} +Color colorPass2
+  {static} +Color colorPass3
+  {static} +Color colorPass4
+  {static} +Color colorPass5
+}
+
+"ciudadaniadigital::utilidades::colores.dart::ColorApp" o-- "dart::ui::Color"
+
+class "ciudadaniadigital::utilidades::dialogos.dart::ActionStyle" {
+  +int index
+  {static} +List<ActionStyle> values
+  {static} +ActionStyle normal
+  {static} +ActionStyle destructive
+  {static} +ActionStyle important
+  {static} +ActionStyle important_destructive
+}
+
+"ciudadaniadigital::utilidades::dialogos.dart::ActionStyle" o-- "ciudadaniadigital::utilidades::dialogos.dart::ActionStyle"
+
+class "ciudadaniadigital::utilidades::dialogos.dart::Dialogo" {
+  {static} -Color _normal
+  {static} -Color _destructive
+  {static} +Future mostrarDialogoNativo()
+  {static} -Widget _androidDialog()
+  {static} -Widget _iosDialog()
+  {static} +dynamic actionSheet()
+  {static} +dynamic dialogoCancelar()
+  {static} +Future showFullScreen()
+  {static} +Future showNativeModalBottomSheet()
+}
+
+"ciudadaniadigital::utilidades::dialogos.dart::Dialogo" o-- "dart::ui::Color"
+
+class "ciudadaniadigital::utilidades::dialogos.dart::OpcionActionSheet" {
+  +dynamic titulo
+  +void Function() accion
+  +Icon icon
+}
+
+"ciudadaniadigital::utilidades::dialogos.dart::OpcionActionSheet" o-- "dart::ui::void Function()"
+"ciudadaniadigital::utilidades::dialogos.dart::OpcionActionSheet" o-- "flutter::src::widgets::icon.dart::Icon"
+
+class "ciudadaniadigital::utilidades::utils.dart::Utilidades" {
+  {static} +FlutterSecureStorage storage
+  {static} +Future saveSecureStorage()
+  {static} +Future deleteAllSecureStorage()
+  {static} +Future readAllSecureStorage()
+  {static} +Future readSecureStorage()
+  {static} +dynamic completarZeroIzquierda()
+  {static} +dynamic capitalize()
+  {static} +void imprimir()
+  {static} +dynamic parseHoraFecha()
+  {static} +dynamic abrirURL()
+  {static} +Future versionAplicacion()
+  {static} +dynamic loadHtmlFromString()
+  {static} +dynamic toBase64()
+  {static} +dynamic fromBase64()
+  {static} +Future compresionLZString()
+  {static} +Future cabeceraUserAgent()
+}
+
+"ciudadaniadigital::utilidades::utils.dart::Utilidades" o-- "flutter_secure_storage::flutter_secure_storage.dart::FlutterSecureStorage"
+
+class "ciudadaniadigital::utilidades::Constantes.example.dart::ConstantesExample" {
+  {static} +String ambiente
+  {static} +String urlGobBoTramitesProd
+  {static} +String urlGobBoTramitesTest
+  {static} +String urlGobBoTramites
+  {static} +String urlGobBo
+  {static} +String urlCiudadaniaTest
+  {static} +String urlCiudadaniaProd
+  {static} +String urlCiudadania
+  {static} +String urlCiudadaniaBaseConsultaTest
+  {static} +String urlCiudadaniaBaseConsultaProd
+  {static} +String urlCiudadaniaBaseConsulta
+  {static} +String urlBasePreRegistroDev
+  {static} +String urlBasePreRegistroProd
+  {static} +String urlBasePreRegistro
+  {static} +String urlCiudadaniaRSSFeedTest
+  {static} +String urlCiudadaniaRSSFeedProd
+  {static} +String urlCiudadaniaRSSFeed
+  {static} +String urlBasePlataformaDev
+  {static} +String urlBasePlataformaProd
+  {static} +String urlBasePlataforma
+  {static} +String urlBasePreRegistroFormDev
+  {static} +String urlBasePreRegistroFormProd
+  {static} +String urlBasePreRegistroForm
+  {static} +String urlBasePreBuzonLoginDev
+  {static} +String urlBasePreBuzonLoginProd
+  {static} +String urlBasePreBuzonLogin
+  {static} +String urlBasePreBuzonDev
+  {static} +String urlBasePreBuzonProd
+  {static} +String urlBasePreBuzon
+  {static} +String urlBasePortalNotPreBuzonDev
+  {static} +String urlBasePortalNotPreBuzonProd
+  {static} +String urlBasePortalNotPreBuzon
+  {static} +String urlVerificarVersionDev
+  {static} +String urlVerificarVersionProd
+  {static} +String urlVerificarVersion
+  {static} +String urlBaseDocDigitalesDev
+  {static} +String urlBaseDocDigitalesProd
+  {static} +String urlBaseDocDigitales
+  {static} +String urlBasePreRegistroEntidadesSucursalesDev
+  {static} +String urlBasePreRegistroEntidadesSucursalesProd
+  {static} +String urlBasePreRegistroEntidadesDev
+  {static} +String urlBasePreRegistroEntidadesProd
+  {static} +String urlBasePreRegistroEntidadesSucursales
+  {static} +String urlBasePreRegistroEntidades
+  {static} +String urlMQTTProd
+  {static} +String urlMQTTTest
+  {static} +String urlMQTT
+  {static} +String puertoMQTT
+  {static} +String socketTest
+  {static} +String socketProd
+  {static} +String urlSocket
+  {static} +String socketPathTest
+  {static} +String socketPathProd
+  {static} +String urlPathSocket
+  {static} +String socketCertTest
+  {static} +String socketCertProd
+  {static} +String socketCertURi
+  {static} +String usuarioMQTTTest
+  {static} +String usuarioMQTTPRod
+  {static} +String usuarioMQTT
+  {static} +String passwordUsuarioTest
+  {static} +String passwordUsuarioProd
+  {static} +String passwordUsuarioMQTT
+  {static} +String idNotificaciones
+  {static} +String nombreAplicacion
+  {static} +String urlBasePreTerminosCondicionesDev
+  {static} +String urlBasePreTerminosCondicionesProd
+  {static} +String urlBasePreTerminosCondiciones
+  {static} +String urlBaseNotificacionesDev
+  {static} +String urlBaseNotificacionesProd
+  {static} +String urlBaseNotificaciones
+  {static} +String primaryNotificacionesChannel
+  {static} +int primaryForegroundNotificacionesServiceID
+  {static} +String mainTopic
+  {static} +String urlIsuerTest
+  {static} +String urlIsuerProd
+  {static} +String urlIsuer
+  {static} +String discoveryURL
+  {static} +String clientID
+  {static} +List<String> scopes
+  {static} +String redirectURL
+}
+
+class "ciudadaniadigital::styles::styles.dart::Estilos" {
+  {static} +InputDecoration entrada()
+  {static} +InputDecoration entrada2()
+  {static} +InputDecoration entradaSegura2()
+}
+
+class "ciudadaniadigital::pages::Inicio::widgets::ListaOpcionesWidget.dart::ListaOpciones" {
+  +BuildContext context
+  {static} +List serviciosDisponibles
+  {static} +List opciones()
+  {static} +Widget row()
+}
+
+"ciudadaniadigital::pages::Inicio::widgets::ListaOpcionesWidget.dart::ListaOpciones" o-- "flutter::src::widgets::framework.dart::BuildContext"
+
+class "ciudadaniadigital::pages::Inicio::login_page.dart::LoginPage" {
+  +State createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "ciudadaniadigital::pages::Inicio::login_page.dart::LoginPage"
+
+class "ciudadaniadigital::pages::Inicio::login_page.dart::_LoginPage" {
+  -GlobalKey<FormState> _formKey
+  -bool _ocupado
+  -FlutterAppAuth _appAuth
+  -dynamic _accessToken
+  -dynamic _idToken
+  -dynamic _refreshToken
+  -TextEditingController _accessTokenTextController
+  -TextEditingController _accessTokenExpirationTextController
+  -TextEditingController _idTokenTextController
+  -TextEditingController _refreshTokenTextController
+  -dynamic _clientId
+  -dynamic _redirectUrl
+  -List _scopes
+  -AuthorizationServiceConfiguration _serviceConfiguration
+  +bool internetstatus
+  -void _setBusyState()
+  -Future _processAuthTokenResponse()
+  -Future _signInWithAutoCodeExchange()
+  +Future configurarTOTP()
+  +Future iniciarSesionOAuth()
+  +dynamic activarBotones()
+  +Widget build()
+  +Widget vistaPortrait()
+  +Widget vistaLanscape()
+  +void initState()
+  +Future initUniLinks()
+  +Future registraNotificaciones()
+}
+
+"ciudadaniadigital::pages::Inicio::login_page.dart::_LoginPage" o-- "flutter::src::widgets::framework.dart::GlobalKey<FormState>"
+"ciudadaniadigital::pages::Inicio::login_page.dart::_LoginPage" o-- "flutter_appauth::src::flutter_appauth.dart::FlutterAppAuth"
+"ciudadaniadigital::pages::Inicio::login_page.dart::_LoginPage" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"ciudadaniadigital::pages::Inicio::login_page.dart::_LoginPage" o-- "flutter_appauth_platform_interface::src::authorization_service_configuration.dart::AuthorizationServiceConfiguration"
+"flutter::src::widgets::framework.dart::State<T>" <|-- "ciudadaniadigital::pages::Inicio::login_page.dart::_LoginPage"
+
+class "ciudadaniadigital::pages::autoregistro_container.dart::AutoRegistroPage" {
+  +State createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "ciudadaniadigital::pages::autoregistro_container.dart::AutoRegistroPage"
+
+class "ciudadaniadigital::pages::autoregistro_container.dart::_AutoRegistroPage" {
+  +int grupoActual
+  +int pasoActual
+  +List formularioWidgets
+  -bool _visible
+  +bool ocupado
+  +ScrollController controladorScroll
+  +int numeroIntentos
+  -int _intento
+  -int _lastRetry
+  -int _delayed
+  +int tiempoAlerta
+  +Widget botonSiguiente()
+  +Widget botonVolver()
+  +Widget botonesVertical()
+  +Widget botonesHorizontal()
+  +Widget build()
+  +Future validarAccionSiguiente()
+  +dynamic progreso()
+  +dynamic anteriorPaso()
+  +dynamic siguientePaso()
+  +dynamic cancelarRegistro()
+  +dynamic animacionPaso()
+  +void initState()
+  +Widget widgetTitulo()
+  +Future dispose()
+}
+
+"ciudadaniadigital::pages::autoregistro_container.dart::_AutoRegistroPage" o-- "flutter::src::widgets::scroll_controller.dart::ScrollController"
+"flutter::src::widgets::framework.dart::State<T>" <|-- "ciudadaniadigital::pages::autoregistro_container.dart::_AutoRegistroPage"
+
+class "ciudadaniadigital::pages::autoregistro_container.dart::Paso" {
+  +dynamic titulo
+  +Widget vista
+  +void Function() accionSiguiente
+  +void Function() accionCancelar
+  +void Function() accionVolver
+  +dynamic botonTexto
+  +bool mostrarVolver
+}
+
+"ciudadaniadigital::pages::autoregistro_container.dart::Paso" o-- "flutter::src::widgets::framework.dart::Widget"
+"ciudadaniadigital::pages::autoregistro_container.dart::Paso" o-- "dart::ui::void Function()"
+
+class "ciudadaniadigital::pages::BuscadorTramites::detalle_tramite.dart::DetalleTramite" {
+  +dynamic idTramite
+  +State createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "ciudadaniadigital::pages::BuscadorTramites::detalle_tramite.dart::DetalleTramite"
+
+class "ciudadaniadigital::pages::BuscadorTramites::detalle_tramite.dart::_DetalleTramiteState" {
+  +dynamic idTramite
+  -bool _peticionActiva
+  -MarcadorModelAccess _marcadorModelAccess
+  +dynamic tramite
+  +void initState()
+  +Future initBookmark()
+  +Future obtenerTramite()
+  +dynamic procesar()
+  {static} +dynamic obtieneHorario()
+  +Widget build()
+  +Widget infoTramite()
+}
+
+"ciudadaniadigital::pages::BuscadorTramites::detalle_tramite.dart::_DetalleTramiteState" o-- "ciudadaniadigital::models::MarcadorModelAccess.dart::MarcadorModelAccess"
+"flutter::src::widgets::framework.dart::State<T>" <|-- "ciudadaniadigital::pages::BuscadorTramites::detalle_tramite.dart::_DetalleTramiteState"
+
+class "ciudadaniadigital::pages::BuscadorTramites::buscador_tramites.dart::BuscadorTramites" {
+  +State createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "ciudadaniadigital::pages::BuscadorTramites::buscador_tramites.dart::BuscadorTramites"
+
+class "ciudadaniadigital::pages::BuscadorTramites::buscador_tramites.dart::_BuscadorTramites" {
+  -TextEditingController _searchController
+  +List listTramiteData
+  -int _cantidadResultados
+  -int _paginaActual
+  -double _tiempo
+  +dynamic tramite
+  -MarcadorModelAccess _marcadorModelAccess
+  -ScrollController _scrollController
+  -bool _peticionActiva
+  +void initState()
+  +void dispose()
+  +Future initBookmark()
+  +void inicializar()
+  +Widget list()
+  +dynamic mostrarInfoTramite()
+  +Widget row()
+  +Widget build()
+  +Future recargarLista()
+  +dynamic cuerpo()
+  +Future buscarTramites()
+  +Widget cargandoDatos()
+  -void _showBookmarkDialog()
+}
+
+"ciudadaniadigital::pages::BuscadorTramites::buscador_tramites.dart::_BuscadorTramites" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"ciudadaniadigital::pages::BuscadorTramites::buscador_tramites.dart::_BuscadorTramites" o-- "ciudadaniadigital::models::MarcadorModelAccess.dart::MarcadorModelAccess"
+"ciudadaniadigital::pages::BuscadorTramites::buscador_tramites.dart::_BuscadorTramites" o-- "flutter::src::widgets::scroll_controller.dart::ScrollController"
+"flutter::src::widgets::framework.dart::State<T>" <|-- "ciudadaniadigital::pages::BuscadorTramites::buscador_tramites.dart::_BuscadorTramites"
+
+class "ciudadaniadigital::pages::BuscadorTramites::buscador_tramites.dart::ListBookmark" {
+  -dynamic _tramiteModelAccess
+  +State createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "ciudadaniadigital::pages::BuscadorTramites::buscador_tramites.dart::ListBookmark"
+
+class "ciudadaniadigital::pages::BuscadorTramites::buscador_tramites.dart::_ListBookmark" {
+  -MarcadorModelAccess _tramiteModelAccess
+  -List<double> _dialogHeights
+  +Widget build()
+  +Widget listBookmark()
+  +Widget rowBookmark()
+  +void cerrarModal()
+}
+
+"ciudadaniadigital::pages::BuscadorTramites::buscador_tramites.dart::_ListBookmark" o-- "ciudadaniadigital::models::MarcadorModelAccess.dart::MarcadorModelAccess"
+"flutter::src::widgets::framework.dart::State<T>" <|-- "ciudadaniadigital::pages::BuscadorTramites::buscador_tramites.dart::_ListBookmark"
+
+class "ciudadaniadigital::pages::PreBuzon::pre_buzon_main.dart::PreBuzonMain" {
+  +State createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "ciudadaniadigital::pages::PreBuzon::pre_buzon_main.dart::PreBuzonMain"
+
+class "ciudadaniadigital::pages::PreBuzon::pre_buzon_main.dart::_PreBuzonMain" {
+  -List<NotificacionModel> _listNotificaciones
+  -dynamic _idCiudadano
+  -dynamic _token
+  -List _arrayFiltro
+  -dynamic _opcionFiltro
+  -bool _peticionActiva
+  +FocusNode cedulaFocus
+  +FocusNode codigoFocus
+  -TextEditingController _cedulaController
+  -TextEditingController _codigoController
+  -GlobalKey<FormState> _formKey
+  +void initState()
+  +void inicializaDatos()
+  +List list()
+  +Widget row()
+  +List getOpcionesDropdown()
+  +Widget cedula()
+  +Widget contrasena()
+  +Widget build()
+  +Future recargarLista()
+  +Future obtieneNotificaciones()
+  +Future abreNotificacion()
+  +Future loginPreBuzon()
+  +dynamic peticion()
+}
+
+"ciudadaniadigital::pages::PreBuzon::pre_buzon_main.dart::_PreBuzonMain" o-- "flutter::src::widgets::focus_manager.dart::FocusNode"
+"ciudadaniadigital::pages::PreBuzon::pre_buzon_main.dart::_PreBuzonMain" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"ciudadaniadigital::pages::PreBuzon::pre_buzon_main.dart::_PreBuzonMain" o-- "flutter::src::widgets::framework.dart::GlobalKey<FormState>"
+"flutter::src::widgets::framework.dart::State<T>" <|-- "ciudadaniadigital::pages::PreBuzon::pre_buzon_main.dart::_PreBuzonMain"
+
+class "ciudadaniadigital::pages::PreBuzon::detalle_notificacion.dart::DetalleNotificacion" {
+  -dynamic _idCiudadano
+  -dynamic _token
+  -NotificacionModel _notificacion
+  +State createState()
+}
+
+"ciudadaniadigital::pages::PreBuzon::detalle_notificacion.dart::DetalleNotificacion" o-- "ciudadaniadigital::models::NotificacionModel.dart::NotificacionModel"
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "ciudadaniadigital::pages::PreBuzon::detalle_notificacion.dart::DetalleNotificacion"
+
+class "ciudadaniadigital::pages::PreBuzon::detalle_notificacion.dart::_DetalleNotificacion" {
+  -dynamic _idCiudadano
+  -dynamic _token
+  -NotificacionModel _notificacion
+  -WebViewController _webViewController
+  +dynamic fechaNotificacion
+  -bool _peticionActiva
+  -bool _esPreBuzon
+  -dynamic _rutaBase
+  +void initState()
+  +dynamic estadoCarga()
+  +Widget build()
+  +Future cierraFlujo()
+  +Future obtieneNotificacion()
+  +Map getHeaders()
+  +Future descargaReportePdf()
+}
+
+"ciudadaniadigital::pages::PreBuzon::detalle_notificacion.dart::_DetalleNotificacion" o-- "ciudadaniadigital::models::NotificacionModel.dart::NotificacionModel"
+"ciudadaniadigital::pages::PreBuzon::detalle_notificacion.dart::_DetalleNotificacion" o-- "webview_flutter::webview_flutter.dart::WebViewController"
+"flutter::src::widgets::framework.dart::State<T>" <|-- "ciudadaniadigital::pages::PreBuzon::detalle_notificacion.dart::_DetalleNotificacion"
+
+class "ciudadaniadigital::pages::autoregistro::widgets::mapaPuntosRegistro.dart::PuntosRegistro" {
+  +int idEntidad
+  +dynamic departamento
+  +State createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "ciudadaniadigital::pages::autoregistro::widgets::mapaPuntosRegistro.dart::PuntosRegistro"
+
+class "ciudadaniadigital::pages::autoregistro::widgets::mapaPuntosRegistro.dart::_PuntosRegistroState" {
+  -int _idEntidad
+  -dynamic _seleccionDepartamento
+  +double latitudUser
+  +double longitudUser
+  +MapController mapController
+  {static} +FlutterMap flutterMap
+  +List<Marker> markers
+  +double zoom
+  -dynamic _seleccionEntidad
+  -List _listaEntidades
+  -List _listaDeparmento
+  -List _listaTempEntidad
+  +void initState()
+  -Future _obtenerPuntosRegistroTemp()
+  -Future _obtenerPuntosRegistro()
+  +Widget build()
+  -dynamic _getCurrentLocation()
+  -dynamic _setZoom()
+  -int _getIdEntidad()
+  -dynamic _reubicarMapa()
+}
+
+"ciudadaniadigital::pages::autoregistro::widgets::mapaPuntosRegistro.dart::_PuntosRegistroState" o-- "flutter_map::flutter_map.dart::MapController"
+"ciudadaniadigital::pages::autoregistro::widgets::mapaPuntosRegistro.dart::_PuntosRegistroState" o-- "flutter_map::flutter_map.dart::FlutterMap"
+"flutter::src::widgets::framework.dart::State<T>" <|-- "ciudadaniadigital::pages::autoregistro::widgets::mapaPuntosRegistro.dart::_PuntosRegistroState"
+
+class "ciudadaniadigital::pages::autoregistro::widgets::terminosCondicionesWidget.dart::TerminosCondiciones" {
+  +State createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "ciudadaniadigital::pages::autoregistro::widgets::terminosCondicionesWidget.dart::TerminosCondiciones"
+
+class "ciudadaniadigital::pages::autoregistro::widgets::terminosCondicionesWidget.dart::_TerminosCondicionesState" {
+  +List sesiones
+  +bool cargando
+  +dynamic contenido
+  -WebViewController _webViewController
+  +void initState()
+  +dynamic configurar()
+  +Widget build()
+}
+
+"ciudadaniadigital::pages::autoregistro::widgets::terminosCondicionesWidget.dart::_TerminosCondicionesState" o-- "webview_flutter::webview_flutter.dart::WebViewController"
+"flutter::src::widgets::framework.dart::State<T>" <|-- "ciudadaniadigital::pages::autoregistro::widgets::terminosCondicionesWidget.dart::_TerminosCondicionesState"
+
+class "ciudadaniadigital::pages::autoregistro::registro_correo.dart::RegistroCorreo" {
+  +void Function() accion
+  {static} +Future registarCorreo()
+  {static} +bool esInstitucional()
+  +State createState()
+}
+
+"ciudadaniadigital::pages::autoregistro::registro_correo.dart::RegistroCorreo" o-- "dart::ui::void Function()"
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "ciudadaniadigital::pages::autoregistro::registro_correo.dart::RegistroCorreo"
+
+class "ciudadaniadigital::pages::autoregistro::registro_correo.dart::_RegistroCorreoState" {
+  +void Function() accion
+  +void initState()
+  +Widget build()
+}
+
+"ciudadaniadigital::pages::autoregistro::registro_correo.dart::_RegistroCorreoState" o-- "dart::ui::void Function()"
+"flutter::src::widgets::framework.dart::State<T>" <|-- "ciudadaniadigital::pages::autoregistro::registro_correo.dart::_RegistroCorreoState"
+
+class "ciudadaniadigital::pages::autoregistro::verificacion_correo.dart::VerificacionCorreo" {
+  +void Function() accion
+  +_VerificacionCorreoState createState()
+  {static} +Future verificarCorreo()
+}
+
+"ciudadaniadigital::pages::autoregistro::verificacion_correo.dart::VerificacionCorreo" o-- "dart::ui::void Function()"
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "ciudadaniadigital::pages::autoregistro::verificacion_correo.dart::VerificacionCorreo"
+
+class "ciudadaniadigital::pages::autoregistro::verificacion_correo.dart::_VerificacionCorreoState" {
+  +void Function() accion
+  +int contador
+  +String correo
+  +void initState()
+  +dynamic mostrarCorreo()
+  +void dispose()
+  +void countdown()
+  +Widget build()
+  +dynamic abrirCorreo()
+  +void certificadoSocket()
+  +Future conexionSocket()
+  {static} +dynamic desconectar()
+}
+
+"ciudadaniadigital::pages::autoregistro::verificacion_correo.dart::_VerificacionCorreoState" o-- "dart::ui::void Function()"
+"flutter::src::widgets::framework.dart::State<T>" <|-- "ciudadaniadigital::pages::autoregistro::verificacion_correo.dart::_VerificacionCorreoState"
+
+class "ciudadaniadigital::pages::autoregistro::metodo_verificacion_permiso.dart::MetodoVerificacionPermisoWidget" {
+  +_MetodoVerificacionPermisoWidgetState createState()
+  {static} +Future verificadoAccion()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "ciudadaniadigital::pages::autoregistro::metodo_verificacion_permiso.dart::MetodoVerificacionPermisoWidget"
+
+class "ciudadaniadigital::pages::autoregistro::metodo_verificacion_permiso.dart::_MetodoVerificacionPermisoWidgetState" {
+  -dynamic _permission
+  +Widget build()
+  +void initState()
+  +Future checkServiceStatus()
+  +Future requestPermission()
+}
+
+"flutter::src::widgets::framework.dart::State<T>" <|-- "ciudadaniadigital::pages::autoregistro::metodo_verificacion_permiso.dart::_MetodoVerificacionPermisoWidgetState"
+
+class "ciudadaniadigital::pages::autoregistro::finalizado_vista.dart::FinalizadoVista" {
+  +_FinalizadoVistaState createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "ciudadaniadigital::pages::autoregistro::finalizado_vista.dart::FinalizadoVista"
+
+class "ciudadaniadigital::pages::autoregistro::finalizado_vista.dart::_FinalizadoVistaState" {
+  +double latitudUser
+  +double longitudUser
+  +MapController mapController
+  {static} +FlutterMap flutterMap
+  +List<Marker> markers
+  +double zoom
+  -int _idEntidad
+  -dynamic _seleccionDepartamento
+  -List _listaEntidades
+  +void initState()
+  +Widget build()
+  -Future _obtenerPuntosRegistro()
+}
+
+"ciudadaniadigital::pages::autoregistro::finalizado_vista.dart::_FinalizadoVistaState" o-- "flutter_map::flutter_map.dart::MapController"
+"ciudadaniadigital::pages::autoregistro::finalizado_vista.dart::_FinalizadoVistaState" o-- "flutter_map::flutter_map.dart::FlutterMap"
+"flutter::src::widgets::framework.dart::State<T>" <|-- "ciudadaniadigital::pages::autoregistro::finalizado_vista.dart::_FinalizadoVistaState"
+
+class "ciudadaniadigital::pages::autoregistro::camara_vista.dart::tipoFoto" {
+  +int index
+  {static} +List<tipoFoto> values
+  {static} +tipoFoto Selfie
+  {static} +tipoFoto CarnetAnverso
+  {static} +tipoFoto CarnerReverso
+}
+
+"ciudadaniadigital::pages::autoregistro::camara_vista.dart::tipoFoto" o-- "ciudadaniadigital::pages::autoregistro::camara_vista.dart::tipoFoto"
+
+class "ciudadaniadigital::pages::autoregistro::camara_vista.dart::TakePictureScreen" {
+  +List<CameraDescription> cameras
+  +tipoFoto opcionFoto
+  +TakePictureScreenState createState()
+}
+
+"ciudadaniadigital::pages::autoregistro::camara_vista.dart::TakePictureScreen" o-- "ciudadaniadigital::pages::autoregistro::camara_vista.dart::tipoFoto"
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "ciudadaniadigital::pages::autoregistro::camara_vista.dart::TakePictureScreen"
+
+class "ciudadaniadigital::pages::autoregistro::camara_vista.dart::TakePictureScreenState" {
+  +tipoFoto opcionFoto
+  -CameraController _controller
+  -Future<void> _initializeControllerFuture
+  +CameraDescription selectedCamera
+  +bool usarPrimeraCamara
+  +int selectedCameraIdx
+  +void initState()
+  +dynamic inicializarCamara()
+  +void dispose()
+  +Widget vistaSiluetaSelfie()
+  +Widget vistaSiluetaCarnet()
+  +Widget vistaIndicacionSilueta()
+  +Widget vistaIndicacionCarnet()
+  +Widget imagenCarnetAnverso()
+  +Widget imagenCarnetReverso()
+  +dynamic cambiarCamara()
+  +Widget botones()
+  +Widget vistaIndicacionAnverso()
+  +Widget vistaIndicacionReverso()
+  +Widget build()
+}
+
+"ciudadaniadigital::pages::autoregistro::camara_vista.dart::TakePictureScreenState" o-- "ciudadaniadigital::pages::autoregistro::camara_vista.dart::tipoFoto"
+"ciudadaniadigital::pages::autoregistro::camara_vista.dart::TakePictureScreenState" o-- "camera::camera.dart::CameraController"
+"ciudadaniadigital::pages::autoregistro::camara_vista.dart::TakePictureScreenState" o-- "camera::camera.dart::CameraDescription"
+"flutter::src::widgets::framework.dart::State<T>" <|-- "ciudadaniadigital::pages::autoregistro::camara_vista.dart::TakePictureScreenState"
+"flutter::src::widgets::binding.dart::WidgetsBindingObserver" <|-- "ciudadaniadigital::pages::autoregistro::camara_vista.dart::TakePictureScreenState"
+
+class "ciudadaniadigital::pages::autoregistro::resumen_fotos.dart::ResumenFotos" {
+  +void Function() accion
+  +_ResumenFotosState createState()
+  {static} +Future verificarFotos()
+}
+
+"ciudadaniadigital::pages::autoregistro::resumen_fotos.dart::ResumenFotos" o-- "dart::ui::void Function()"
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "ciudadaniadigital::pages::autoregistro::resumen_fotos.dart::ResumenFotos"
+
+class "ciudadaniadigital::pages::autoregistro::resumen_fotos.dart::_ResumenFotosState" {
+  +bool ocupado
+  +ImagePicker picker
+  +void initState()
+  +dynamic obtenerImagen()
+  +Future selectFromImagePickerSelfie()
+  +Future selectFromImagePickerCarnetAnverso()
+  +Future selectFromImagePickerCarnetReverso()
+  +dynamic ajustarProgreso()
+  +void dispose()
+  +Widget build()
+}
+
+"ciudadaniadigital::pages::autoregistro::resumen_fotos.dart::_ResumenFotosState" o-- "image_picker::image_picker.dart::ImagePicker"
+"flutter::src::widgets::framework.dart::State<T>" <|-- "ciudadaniadigital::pages::autoregistro::resumen_fotos.dart::_ResumenFotosState"
+"flutter::src::widgets::binding.dart::WidgetsBindingObserver" <|-- "ciudadaniadigital::pages::autoregistro::resumen_fotos.dart::_ResumenFotosState"
+
+class "ciudadaniadigital::pages::autoregistro::verificacion_celular.dart::VerificacionCelular" {
+  +void Function() accion
+  +_VerificacionCelularState createState()
+  {static} +Future verificarCelular()
+}
+
+"ciudadaniadigital::pages::autoregistro::verificacion_celular.dart::VerificacionCelular" o-- "dart::ui::void Function()"
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "ciudadaniadigital::pages::autoregistro::verificacion_celular.dart::VerificacionCelular"
+
+class "ciudadaniadigital::pages::autoregistro::verificacion_celular.dart::_VerificacionCelularState" {
+  +void Function() accion
+  -int _otpCodeLength
+  -dynamic _otpCode
+  +int contador
+  +dynamic celular
+  +void initState()
+  +dynamic mostrarCelular()
+  +void dispose()
+  +void countdown()
+  +Future obtenerSignature()
+  +Widget build()
+  -dynamic _onOtpCallBack()
+}
+
+"ciudadaniadigital::pages::autoregistro::verificacion_celular.dart::_VerificacionCelularState" o-- "dart::ui::void Function()"
+"flutter::src::widgets::framework.dart::State<T>" <|-- "ciudadaniadigital::pages::autoregistro::verificacion_celular.dart::_VerificacionCelularState"
+
+class "ciudadaniadigital::pages::autoregistro::informacion_carnet.dart::InformacionCarnet" {
+  +_InformacionCarnetState createState()
+  {static} +Future verificadoAccion()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "ciudadaniadigital::pages::autoregistro::informacion_carnet.dart::InformacionCarnet"
+
+class "ciudadaniadigital::pages::autoregistro::informacion_carnet.dart::_InformacionCarnetState" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State<T>" <|-- "ciudadaniadigital::pages::autoregistro::informacion_carnet.dart::_InformacionCarnetState"
+
+class "ciudadaniadigital::pages::autoregistro::metodo_verificacion_vista.dart::MetodoVerificacionOpcionesWidget" {
+  +_MetodoVerificacionOpcionesWidgetState createState()
+  {static} +bool verificacionPresencial()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "ciudadaniadigital::pages::autoregistro::metodo_verificacion_vista.dart::MetodoVerificacionOpcionesWidget"
+
+class "ciudadaniadigital::pages::autoregistro::metodo_verificacion_vista.dart::_MetodoVerificacionOpcionesWidgetState" {
+  +DateTime fechaLimite
+  +DateFormat formatter
+  +void initState()
+  +dynamic setSelectedRadio()
+  +Widget build()
+}
+
+"ciudadaniadigital::pages::autoregistro::metodo_verificacion_vista.dart::_MetodoVerificacionOpcionesWidgetState" o-- "intl::intl.dart::DateFormat"
+"flutter::src::widgets::framework.dart::State<T>" <|-- "ciudadaniadigital::pages::autoregistro::metodo_verificacion_vista.dart::_MetodoVerificacionOpcionesWidgetState"
+
+class "ciudadaniadigital::pages::autoregistro::verificado_vista.dart::VerificadoVista" {
+  +dynamic mensaje
+  +bool error
+  +_VerificadoVistaState createState()
+  {static} +Future verificadoAccion()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "ciudadaniadigital::pages::autoregistro::verificado_vista.dart::VerificadoVista"
+
+class "ciudadaniadigital::pages::autoregistro::verificado_vista.dart::_VerificadoVistaState" {
+  +bool error
+  +dynamic mensaje
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State<T>" <|-- "ciudadaniadigital::pages::autoregistro::verificado_vista.dart::_VerificadoVistaState"
+
+class "ciudadaniadigital::pages::autoregistro::registro_datos_personales.dart::RegistroDatosPersonales" {
+  +void Function() accion
+  +_RegistroDatosPersonalesState createState()
+  {static} +dynamic obtenerComplemento()
+  {static} +dynamic obtenerCarnet()
+  {static} +Future registarDatosPersonales()
+}
+
+"ciudadaniadigital::pages::autoregistro::registro_datos_personales.dart::RegistroDatosPersonales" o-- "dart::ui::void Function()"
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "ciudadaniadigital::pages::autoregistro::registro_datos_personales.dart::RegistroDatosPersonales"
+
+class "ciudadaniadigital::pages::autoregistro::registro_datos_personales.dart::_RegistroDatosPersonalesState" {
+  +void Function() accion
+  +Zxcvbn estimadorFortaleza
+  +int passwordScore
+  +FocusNode nombreFocus
+  +FocusNode apellidoPaternoFocus
+  +FocusNode apellidoMaternoFocus
+  +FocusNode numeroCIFocus
+  +FocusNode fechaNacimientoFocus
+  +DateTime currentDate
+  +FocusNode contrasenaFocus
+  +FocusNode repetirContrasenaFocus
+  +bool iconoPassword
+  +bool iconoPasswordRepetir
+  +int edadMinima
+  {static} +Map<int, Widget> opcionesNacionalWidget
+  +double ancho
+  +List seguridadContrasenia
+  +void callDatePicker()
+  +int cantidadAniosBisiestos()
+  +void initState()
+  +Widget alertaSeguridad()
+  +Widget nombre()
+  +Widget apellidoPaterno()
+  +Widget apellidoMaterno()
+  +Widget cedulaIdentidad()
+  +Widget fechaNacimiento()
+  +Widget opcionesNacional()
+  +Widget contrasena()
+  +Widget repetirContrasena()
+  +Widget seguridad()
+  +Widget ayudaCarnet()
+  +Widget terminosYCondiciones()
+  +Widget vistaPortrait()
+  +Widget vistaLandscape()
+  +Widget build()
+}
+
+"ciudadaniadigital::pages::autoregistro::registro_datos_personales.dart::_RegistroDatosPersonalesState" o-- "dart::ui::void Function()"
+"ciudadaniadigital::pages::autoregistro::registro_datos_personales.dart::_RegistroDatosPersonalesState" o-- "zxcvbn::zxcvbn.dart::Zxcvbn"
+"ciudadaniadigital::pages::autoregistro::registro_datos_personales.dart::_RegistroDatosPersonalesState" o-- "flutter::src::widgets::focus_manager.dart::FocusNode"
+"flutter::src::widgets::framework.dart::State<T>" <|-- "ciudadaniadigital::pages::autoregistro::registro_datos_personales.dart::_RegistroDatosPersonalesState"
+
+class "ciudadaniadigital::pages::autoregistro::registro_celular.dart::RegistroCelular" {
+  +void Function() accion
+  {static} +RegExp pattern
+  +State createState()
+  {static} +Future registarCelular()
+}
+
+"ciudadaniadigital::pages::autoregistro::registro_celular.dart::RegistroCelular" o-- "dart::ui::void Function()"
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "ciudadaniadigital::pages::autoregistro::registro_celular.dart::RegistroCelular"
+
+class "ciudadaniadigital::pages::autoregistro::registro_celular.dart::_RegistroCelularState" {
+  +void Function() accion
+  +void initState()
+  +Widget build()
+}
+
+"ciudadaniadigital::pages::autoregistro::registro_celular.dart::_RegistroCelularState" o-- "dart::ui::void Function()"
+"flutter::src::widgets::framework.dart::State<T>" <|-- "ciudadaniadigital::pages::autoregistro::registro_celular.dart::_RegistroCelularState"
+
+class "ciudadaniadigital::pages::autoregistro::metodo_verificacion_llamada.dart::MetodoVerificacionLlamadaWidget" {
+  +_MetodoVerificacionLlamadaWidgetState createState()
+  {static} +Future verificadoAccion()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "ciudadaniadigital::pages::autoregistro::metodo_verificacion_llamada.dart::MetodoVerificacionLlamadaWidget"
+
+class "ciudadaniadigital::pages::autoregistro::metodo_verificacion_llamada.dart::_MetodoVerificacionLlamadaWidgetState" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State<T>" <|-- "ciudadaniadigital::pages::autoregistro::metodo_verificacion_llamada.dart::_MetodoVerificacionLlamadaWidgetState"
+
+class "ciudadaniadigital::pages::autoregistro::horario_llamada.dart::HorarioLlamada" {
+  +_HorarioLlamadaState createState()
+  {static} +Future verificar()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "ciudadaniadigital::pages::autoregistro::horario_llamada.dart::HorarioLlamada"
+
+class "ciudadaniadigital::pages::autoregistro::horario_llamada.dart::_HorarioLlamadaState" {
+  -List _opcionesFiltro
+  +void initState()
+  +dynamic obtenerEntidadesHorarios()
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State<T>" <|-- "ciudadaniadigital::pages::autoregistro::horario_llamada.dart::_HorarioLlamadaState"
+
+class "ciudadaniadigital::pages::autoregistro::opcion_entidad_registradora.dart::OpcionEntidadRegistradora" {
+  +_OpcionEntidadRegistradoraState createState()
+  {static} +Future verificar()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "ciudadaniadigital::pages::autoregistro::opcion_entidad_registradora.dart::OpcionEntidadRegistradora"
+
+class "ciudadaniadigital::pages::autoregistro::opcion_entidad_registradora.dart::_OpcionEntidadRegistradoraState" {
+  -List _opcionesFiltro
+  +void initState()
+  +dynamic obtenerEntidadesHorarios()
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State<T>" <|-- "ciudadaniadigital::pages::autoregistro::opcion_entidad_registradora.dart::_OpcionEntidadRegistradoraState"
+
+class "ciudadaniadigital::pages::autoregistro::finalizadoRemoto.dart::FinalizadoRemoto" {
+  +dynamic mensaje
+  +bool error
+  +_FinalizadoRemotoState createState()
+  {static} +Future verificadoAccion()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "ciudadaniadigital::pages::autoregistro::finalizadoRemoto.dart::FinalizadoRemoto"
+
+class "ciudadaniadigital::pages::autoregistro::finalizadoRemoto.dart::_FinalizadoRemotoState" {
+  +bool error
+  +dynamic mensaje
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State<T>" <|-- "ciudadaniadigital::pages::autoregistro::finalizadoRemoto.dart::_FinalizadoRemotoState"
+
+class "ciudadaniadigital::pages::ciudadania_tabs::ServicioVistaWeb.dart::ServiciosVistaWeb" {
+  +bool bloquear
+  +_ServiciosVistaWebState createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "ciudadaniadigital::pages::ciudadania_tabs::ServicioVistaWeb.dart::ServiciosVistaWeb"
+
+class "ciudadaniadigital::pages::ciudadania_tabs::ServicioVistaWeb.dart::_ServiciosVistaWebState" {
+  +dynamic token
+  +bool bloquear
+  -WebViewController _webViewController
+  +void initState()
+  +Future inicializar()
+  +Widget build()
+}
+
+"ciudadaniadigital::pages::ciudadania_tabs::ServicioVistaWeb.dart::_ServiciosVistaWebState" o-- "webview_flutter::webview_flutter.dart::WebViewController"
+"flutter::src::widgets::framework.dart::State<T>" <|-- "ciudadaniadigital::pages::ciudadania_tabs::ServicioVistaWeb.dart::_ServiciosVistaWebState"
+
+class "ciudadaniadigital::pages::ciudadania_tabs::OpcionesWidget.dart::OpcionesWidget" {
+  +State createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "ciudadaniadigital::pages::ciudadania_tabs::OpcionesWidget.dart::OpcionesWidget"
+
+class "ciudadaniadigital::pages::ciudadania_tabs::OpcionesWidget.dart::_OpcionesWidgetState" {
+  {static} +bool correoActivo
+  {static} +bool pushActivo
+  {static} +bool smsActivo
+  {static} +bool correoHabilitado
+  {static} +bool pushHabilitado
+  -dynamic _accessToken
+  +void initState()
+  +Future obtenerConfiguracionAlertas()
+  +dynamic procesarRespuestaAlertas()
+  +dynamic desactivarAlertas()
+  +void didChangeAppLifecycleState()
+  +void dispose()
+  +Widget build()
+  +Widget opcionesAlertas()
+  +Future configurarAlerta()
+}
+
+"flutter::src::widgets::framework.dart::State<T>" <|-- "ciudadaniadigital::pages::ciudadania_tabs::OpcionesWidget.dart::_OpcionesWidgetState"
+"flutter::src::widgets::binding.dart::WidgetsBindingObserver" <|-- "ciudadaniadigital::pages::ciudadania_tabs::OpcionesWidget.dart::_OpcionesWidgetState"
+
+class "ciudadaniadigital::pages::ciudadania_tabs::AccesoWidget.dart::AccesoWidget" {
+  +bool bloquear
+  +dynamic texto
+  +State createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "ciudadaniadigital::pages::ciudadania_tabs::AccesoWidget.dart::AccesoWidget"
+
+class "ciudadaniadigital::pages::ciudadania_tabs::AccesoWidget.dart::_AccesoWidgetState" {
+  +bool bloquear
+  +dynamic texto
+  +String secret
+  +int code
+  +int interval
+  +int horaServidor
+  -Timer _timer
+  +int intervaloSegundos
+  +ScrollController scrollController
+  +List sesiones
+  +bool cargando
+  +void initState()
+  +dynamic iniciarTOTP()
+  +dynamic generarTOTP()
+  +void dispose()
+  +void didChangeAppLifecycleState()
+  +void copiarPortapapeles()
+  +void contador()
+  +dynamic actualizarTOTP()
+  +dynamic estadoCarga()
+  +dynamic obtenerSesiones()
+  +Widget codigoVerificacion()
+  +dynamic vistaDispositivos()
+  +Widget vistaPortrait()
+  +Widget vistaLanscape()
+  +Widget build()
+  +Widget contenido()
+  +List list()
+  +Widget row()
+}
+
+"ciudadaniadigital::pages::ciudadania_tabs::AccesoWidget.dart::_AccesoWidgetState" o-- "dart::async::Timer"
+"ciudadaniadigital::pages::ciudadania_tabs::AccesoWidget.dart::_AccesoWidgetState" o-- "flutter::src::widgets::scroll_controller.dart::ScrollController"
+"flutter::src::widgets::framework.dart::State<T>" <|-- "ciudadaniadigital::pages::ciudadania_tabs::AccesoWidget.dart::_AccesoWidgetState"
+"flutter::src::widgets::binding.dart::WidgetsBindingObserver" <|-- "ciudadaniadigital::pages::ciudadania_tabs::AccesoWidget.dart::_AccesoWidgetState"
+
+class "ciudadaniadigital::pages::ciudadania_tabs::PerfilWidget.dart::PerfilWidget" {
+  +bool bloquear
+  +dynamic texto
+  +State createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "ciudadaniadigital::pages::ciudadania_tabs::PerfilWidget.dart::PerfilWidget"
+
+class "ciudadaniadigital::pages::ciudadania_tabs::PerfilWidget.dart::_PerfilWidgetState" {
+  +bool bloquear
+  +dynamic texto
+  +String fechaNacimiento
+  -dynamic _userInfo
+  -bool _mostrarProgreso
+  +void initState()
+  +dynamic obtenerPerfil()
+  +Widget perfil()
+  +Widget bienvenida()
+  +Widget indicaciones()
+  +Widget opciones()
+  +dynamic estadoCarga()
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State<T>" <|-- "ciudadaniadigital::pages::ciudadania_tabs::PerfilWidget.dart::_PerfilWidgetState"
+
+class "ciudadaniadigital::pages::ciudadania_tabs::NotificacionesWidget.dart::NotificacionesWidget" {
+  +bool bloquear
+  +dynamic texto
+  +State createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "ciudadaniadigital::pages::ciudadania_tabs::NotificacionesWidget.dart::NotificacionesWidget"
+
+class "ciudadaniadigital::pages::ciudadania_tabs::NotificacionesWidget.dart::_NotificacionesWidgetState" {
+  +bool bloquear
+  +dynamic texto
+  -dynamic _accessToken
+  -bool _peticionCorrecta
+  -List<NotificacionModel> _notificacionesDisponibles
+  -List _listIdDestacados
+  -dynamic _seleccionFiltro
+  -List<Map> _opcionesFiltro
+  -bool _peticionActiva
+  -bool _mostrarProgreso
+  +dynamic valorFiltro
+  +void initState()
+  +dynamic estadoCarga()
+  +Widget build()
+  +Widget bandejaPrincipal()
+  +Widget contenido()
+  +Widget filtro()
+  +Widget row()
+  +Widget widgetDestacado()
+  +Future abreNotificacion()
+  +Future obtieneNotificaciones()
+  +Future obtieneDestacados()
+}
+
+"flutter::src::widgets::framework.dart::State<T>" <|-- "ciudadaniadigital::pages::ciudadania_tabs::NotificacionesWidget.dart::_NotificacionesWidgetState"
+
+class "ciudadaniadigital::pages::ciudadania_tabs::ServiciosWidget.dart::ServiciosWidget" {
+  +bool bloquear
+  +dynamic texto
+  +State createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "ciudadaniadigital::pages::ciudadania_tabs::ServiciosWidget.dart::ServiciosWidget"
+
+class "ciudadaniadigital::pages::ciudadania_tabs::ServiciosWidget.dart::_ServiciosWidgetState" {
+  +bool bloquear
+  +dynamic texto
+  +List serviciosDisponibles
+  +void initState()
+  +Widget build()
+  +Widget indicaciones()
+  +Widget row()
+}
+
+"flutter::src::widgets::framework.dart::State<T>" <|-- "ciudadaniadigital::pages::ciudadania_tabs::ServiciosWidget.dart::_ServiciosWidgetState"
+
+class "ciudadaniadigital::pages::ciudadania_tabs::home.dart::HomePage" {
+  +bool actualizarSesion
+  +State createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "ciudadaniadigital::pages::ciudadania_tabs::home.dart::HomePage"
+
+class "ciudadaniadigital::pages::ciudadania_tabs::home.dart::_HomePageState" {
+  -int _currentIndex
+  +bool internetstatus
+  +bool verificandoSesion
+  +bool actualizarSesion
+  -List<Widget> _children
+  +void initState()
+  +void inicializar()
+  +void didChangeAppLifecycleState()
+  +Future actualizarOauth()
+  +void dispose()
+  +dynamic habilitar()
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State<T>" <|-- "ciudadaniadigital::pages::ciudadania_tabs::home.dart::_HomePageState"
+"flutter::src::widgets::binding.dart::WidgetsBindingObserver" <|-- "ciudadaniadigital::pages::ciudadania_tabs::home.dart::_HomePageState"
+
+class "ciudadaniadigital::pages::ciudadania_tabs::cabecera.dart::Elementos" {
+  {static} +dynamic cabeceraOpciones()
+  {static} +dynamic cabeceraLogos2()
+  {static} +dynamic cabeceraLogos3()
+  {static} +Widget cabeceraLogos()
+  {static} +Widget cabeceraLogosModal()
+}
+
+class "ciudadaniadigital::pages::ciudadania_tabs::opciones::StatusAppBar.dart::StatusAppbar" {
+  +void Function(bool, bool) accionCambioStatusAppBar
+  +Size preferredSize
+  +State createState()
+}
+
+"ciudadaniadigital::pages::ciudadania_tabs::opciones::StatusAppBar.dart::StatusAppbar" o-- "ciudadaniadigital::pages::ciudadania_tabs::opciones::StatusAppBar.dart::void Function(bool, bool)"
+"ciudadaniadigital::pages::ciudadania_tabs::opciones::StatusAppBar.dart::StatusAppbar" o-- "dart::ui::Size"
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "ciudadaniadigital::pages::ciudadania_tabs::opciones::StatusAppBar.dart::StatusAppbar"
+"flutter::src::widgets::preferred_size.dart::PreferredSizeWidget" <|-- "ciudadaniadigital::pages::ciudadania_tabs::opciones::StatusAppBar.dart::StatusAppbar"
+
+class "ciudadaniadigital::pages::ciudadania_tabs::opciones::StatusAppBar.dart::StatusAppbarState" {
+  +StreamSubscription<DataConnectionStatus> listener
+  +String statusAppBarDescription
+  +void Function(bool, bool) accionCambioStatusAppBar
+  +void Function() accionTapAppBar
+  +bool internetDisponibleRecuperado
+  +void initState()
+  +void dispose()
+  +Widget build()
+  +dynamic checkInternet()
+  +dynamic verificarVersion()
+}
+
+"ciudadaniadigital::pages::ciudadania_tabs::opciones::StatusAppBar.dart::StatusAppbarState" o-- "dart::async::StreamSubscription<DataConnectionStatus>"
+"ciudadaniadigital::pages::ciudadania_tabs::opciones::StatusAppBar.dart::StatusAppbarState" o-- "ciudadaniadigital::pages::ciudadania_tabs::opciones::StatusAppBar.dart::void Function(bool, bool)"
+"ciudadaniadigital::pages::ciudadania_tabs::opciones::StatusAppBar.dart::StatusAppbarState" o-- "ciudadaniadigital::pages::ciudadania_tabs::opciones::StatusAppBar.dart::void Function()"
+"flutter::src::widgets::framework.dart::State<T>" <|-- "ciudadaniadigital::pages::ciudadania_tabs::opciones::StatusAppBar.dart::StatusAppbarState"
+
+class "ciudadaniadigital::pages::ciudadania_tabs::opciones::InformacionAppWidget.dart::InformacionApp" {
+  +State createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "ciudadaniadigital::pages::ciudadania_tabs::opciones::InformacionAppWidget.dart::InformacionApp"
+
+class "ciudadaniadigital::pages::ciudadania_tabs::opciones::InformacionAppWidget.dart::_InformacionAppState" {
+  +dynamic version
+  +void initState()
+  +dynamic configurar()
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State<T>" <|-- "ciudadaniadigital::pages::ciudadania_tabs::opciones::InformacionAppWidget.dart::_InformacionAppState"
+
+class "ciudadaniadigital::pages::ciudadania_tabs::opciones::SesionesWidget.dart::SesionesWidget" {
+  +State createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "ciudadaniadigital::pages::ciudadania_tabs::opciones::SesionesWidget.dart::SesionesWidget"
+
+class "ciudadaniadigital::pages::ciudadania_tabs::opciones::SesionesWidget.dart::_SesionesWidgetState" {
+  +List sesiones
+  +bool cargando
+  +void initState()
+  +dynamic estadoCarga()
+  +dynamic obtenerSesiones()
+  +Widget build()
+  +Widget list()
+  +Widget row()
+}
+
+"flutter::src::widgets::framework.dart::State<T>" <|-- "ciudadaniadigital::pages::ciudadania_tabs::opciones::SesionesWidget.dart::_SesionesWidgetState"
+
+class "ciudadaniadigital::pages::ciudadania_tabs::opciones::CambiarContrasenia.dart::CambiarContrasenia" {
+  +State createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "ciudadaniadigital::pages::ciudadania_tabs::opciones::CambiarContrasenia.dart::CambiarContrasenia"
+
+class "ciudadaniadigital::pages::ciudadania_tabs::opciones::CambiarContrasenia.dart::_CambiarContraseniaState" {
+  +bool cargando
+  +dynamic updateInteraction
+  +Zxcvbn estimadorFortaleza
+  +int passwordScore
+  +TextEditingController password
+  +bool iconShowPassword
+  +FocusNode passwordFocus
+  +TextEditingController newPassword
+  +bool iconShowNewPassword
+  +FocusNode newPasswordFocus
+  +bool iconShowNewPasswordRepeat
+  +TextEditingController newPasswordRepeat
+  +FocusNode newPasswordFocusRepeat
+  -GlobalKey<FormState> _formKey1
+  -GlobalKey<FormState> _formKey2
+  +List seguridadContrasenia
+  +void initState()
+  +dynamic mostrarIconoNewPassword()
+  +dynamic mostrarIconoNewPasswordRepeat()
+  +dynamic estadoCarga()
+  +dynamic verificarContraseniaActual()
+  +dynamic modificarContrasenia()
+  +Widget seguridad()
+  +Widget build()
+}
+
+"ciudadaniadigital::pages::ciudadania_tabs::opciones::CambiarContrasenia.dart::_CambiarContraseniaState" o-- "zxcvbn::zxcvbn.dart::Zxcvbn"
+"ciudadaniadigital::pages::ciudadania_tabs::opciones::CambiarContrasenia.dart::_CambiarContraseniaState" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"ciudadaniadigital::pages::ciudadania_tabs::opciones::CambiarContrasenia.dart::_CambiarContraseniaState" o-- "flutter::src::widgets::focus_manager.dart::FocusNode"
+"ciudadaniadigital::pages::ciudadania_tabs::opciones::CambiarContrasenia.dart::_CambiarContraseniaState" o-- "flutter::src::widgets::framework.dart::GlobalKey<FormState>"
+"flutter::src::widgets::framework.dart::State<T>" <|-- "ciudadaniadigital::pages::ciudadania_tabs::opciones::CambiarContrasenia.dart::_CambiarContraseniaState"
+
+class "ciudadaniadigital::pages::ciudadania_tabs::opciones::ConfiguracionNotificaciones.dart::ConfiguracionNotificaciones" {
+  +State createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "ciudadaniadigital::pages::ciudadania_tabs::opciones::ConfiguracionNotificaciones.dart::ConfiguracionNotificaciones"
+
+class "ciudadaniadigital::pages::ciudadania_tabs::opciones::ConfiguracionNotificaciones.dart::Debouncer" {
+  +int milliseconds
+  +void Function() action
+  -Timer _timer
+  +dynamic run()
+}
+
+"ciudadaniadigital::pages::ciudadania_tabs::opciones::ConfiguracionNotificaciones.dart::Debouncer" o-- "dart::ui::void Function()"
+"ciudadaniadigital::pages::ciudadania_tabs::opciones::ConfiguracionNotificaciones.dart::Debouncer" o-- "dart::async::Timer"
+
+class "ciudadaniadigital::pages::ciudadania_tabs::opciones::ConfiguracionNotificaciones.dart::_ConfiguracionNotificaciones" {
+  +Debouncer debouncer
+  -TextEditingController _searchController
+  -List<SeccionEntidadTramite> _listado
+  -List<EntidadTramiteModel> _listaModel
+  -List<EntidadTramiteModel> _listaModelBckp
+  -bool _cargando
+  -bool _peticionCorrecta
+  -int _flagHabilitados
+  +void initState()
+  +dynamic estadoCarga()
+  +dynamic obtenerEntidadesTramite()
+  +List castFromListModel()
+  +Widget build()
+  +Widget lista()
+  +Widget row()
+  +Widget widgetEntidad()
+  +Widget widgetTramite()
+  +Widget botonesFiltro()
+  +Widget busquedaTramite()
+  +List filterList()
+  +List arrayObjetoTramite()
+  +Future cambiarEstadoTramites()
+  +Future cambiarEstadoEntidad()
+  +List obtenerIdsTramite()
+}
+
+"ciudadaniadigital::pages::ciudadania_tabs::opciones::ConfiguracionNotificaciones.dart::_ConfiguracionNotificaciones" o-- "ciudadaniadigital::pages::ciudadania_tabs::opciones::ConfiguracionNotificaciones.dart::Debouncer"
+"ciudadaniadigital::pages::ciudadania_tabs::opciones::ConfiguracionNotificaciones.dart::_ConfiguracionNotificaciones" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"flutter::src::widgets::framework.dart::State<T>" <|-- "ciudadaniadigital::pages::ciudadania_tabs::opciones::ConfiguracionNotificaciones.dart::_ConfiguracionNotificaciones"
+
+abstract class "ciudadaniadigital::pages::ciudadania_tabs::opciones::ConfiguracionNotificaciones.dart::SeccionEntidadTramite" {
+}
+
+class "ciudadaniadigital::pages::ciudadania_tabs::opciones::ConfiguracionNotificaciones.dart::EntidadRow" {
+  +int idEntidad
+  +dynamic nombreEntidad
+  +bool autorizado
+}
+
+"ciudadaniadigital::pages::ciudadania_tabs::opciones::ConfiguracionNotificaciones.dart::SeccionEntidadTramite" <|-- "ciudadaniadigital::pages::ciudadania_tabs::opciones::ConfiguracionNotificaciones.dart::EntidadRow"
+
+class "ciudadaniadigital::pages::ciudadania_tabs::opciones::ConfiguracionNotificaciones.dart::TramiteRow" {
+  +dynamic nombreTramite
+  +int idEntidad
+  +bool autorizado
+  +bool obligatorio
+  +int codigoPortal
+}
+
+"ciudadaniadigital::pages::ciudadania_tabs::opciones::ConfiguracionNotificaciones.dart::SeccionEntidadTramite" <|-- "ciudadaniadigital::pages::ciudadania_tabs::opciones::ConfiguracionNotificaciones.dart::TramiteRow"
+
+class "ciudadaniadigital::pages::alert_page.dart::AlertaPage" {
+  +State createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "ciudadaniadigital::pages::alert_page.dart::AlertaPage"
+
+class "ciudadaniadigital::pages::alert_page.dart::_AlertaPage" {
+  +int tiempoCerrar
+  +dynamic mensaje
+  +void initState()
+  +Future finalizarApp()
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State<T>" <|-- "ciudadaniadigital::pages::alert_page.dart::_AlertaPage"
+
+
+@enduml
